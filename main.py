@@ -8,6 +8,10 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+    watch = pygame.time.Clock()
+    dt = 0
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -15,6 +19,9 @@ def main():
             
         screen.fill(color=screen_color)
         pygame.display.flip()
+
+        watch.tick(60)
+        dt = watch.tick() / 1000
 
 
 
