@@ -21,10 +21,14 @@ def main():
             
         screen.fill(color=screen_color)
         player.draw(screen)
+
+        player.update(dt)
+
         pygame.display.flip()
 
         watch.tick(60)
-        dt = watch.tick() / 1000
+        dt = watch.tick(60) / 1000
+        
 
 
 
