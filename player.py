@@ -3,11 +3,7 @@ from constants import *
 import pygame
 
 class Player(CircleShape):
-
     def __init__(self, x, y):
-        group_a = pygame.sprite.Group()
-        group_b = pygame.sprite.Group()
-        Player.containers = (group_a, group_b)
         
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
