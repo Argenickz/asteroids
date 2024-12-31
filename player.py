@@ -5,9 +5,10 @@ import pygame
 
 class Player(CircleShape):
     def __init__(self, x, y):
-        self.cooldown = 0
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.cooldown = 0
+
         
 
     # in the player class
@@ -28,6 +29,7 @@ class Player(CircleShape):
 
 
     def update(self, dt):
+        self.cooldown -= dt
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             self.rotate(-dt) 
@@ -42,10 +44,7 @@ class Player(CircleShape):
             self.move(-dt)
 
         if keys[pygame.K_SPACE]:
-            if self.cooldown > 0:
-                self.cooldown -= dt
-            else:
-                self.shoot()
+            self.shoot()
                 
 
                 
@@ -61,6 +60,10 @@ class Player(CircleShape):
         self.position += forward * PLAYER_SPEED * dt
 
     def shoot(self):
+        # This prevents the player to shoot
+        if self.cooldown > 0:
+            return
+        # ===============================
         bullet = Shot(self.position, SHOT_RADIUS)
         bullet.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
         self.cooldown = PLAYER_SHOOT_COOLDOWN
