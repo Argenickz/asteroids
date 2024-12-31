@@ -22,6 +22,8 @@ def main():
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
 
+    
+
     # Containers
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
@@ -33,6 +35,9 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
     asteroid_field_object = AsteroidField()
+    player.cooldown = PLAYER_SHOOT_COOLDOWN
+
+    
     
    
     while True:
@@ -45,6 +50,7 @@ def main():
        
         for entity in updatable:
             entity.update(dt)
+            
 
 
         screen.fill(color=screen_color)
@@ -61,7 +67,7 @@ def main():
                 sys.exit()
 
         pygame.display.flip()
-
+    
 
         dt = watch.tick(60) / 1000
         
