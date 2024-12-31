@@ -16,12 +16,12 @@ def main():
     watch = pygame.time.Clock()
     dt = 0
 
+
     # Groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
-
     
 
     # Containers
@@ -38,20 +38,15 @@ def main():
     player.cooldown = PLAYER_SHOOT_COOLDOWN
 
     
-    
-   
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
             
 
-
-       
         for entity in updatable:
             entity.update(dt)
             
-
 
         screen.fill(color=screen_color)
 
@@ -60,15 +55,13 @@ def main():
             entity.draw(screen)
 
         
-
-
         for asteroid in asteroids:
             if asteroid.collide(player):
                 print('Game over!')
                 sys.exit()
             for shot in shots:
                 if asteroid.collide(shot):
-                    asteroid.kill()
+                    asteroid.split()
                     shot.kill()
 
 
@@ -77,10 +70,6 @@ def main():
 
         dt = watch.tick(60) / 1000
         
-
-
-
-
 
 if __name__ == "__main__":
     main()
